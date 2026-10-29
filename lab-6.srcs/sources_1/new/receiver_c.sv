@@ -32,14 +32,21 @@ module receiver_c(
     logic counter_en;
     logic S7_now, S15_now;
 
-    logic [10:0] bit_state;
-
-    typedef enum logic {
-        S_IDLE = 1'b0,
-        S_DETECTING = 1'b1
+    typedef enum logic [10:0] { //one hot except IDLE state is 10'b0
+        S_IDLE = 10'b00000000001,
+        S_START = 10'b00000000010,
+        S_BIT0 = 10'b00000000100,
+        S_BIT1 = 10'b00000001000,
+        S_BIT2 = 10'b00000010000,
+        S_BIT3 = 10'b00000100000,
+        S_BIT4 = 10'b00001000000,
+        S_BIT5 = 10'b00010000000,
+        S_BIT6 = 10'b00100000000,
+        S_BIT7 = 10'b01000000000,
+        S_STOP = 10'b10000000000
     } state_t;
 
-    state_t state, next_state;
+    state_t bit_state;
 
     counter_16 receiver_counter_16 (
         .i_clk(i_clk),
@@ -60,14 +67,24 @@ module receiver_c(
         .o_bit_state(bit_state) // This is 1-hot encoded the 11 states that the system goes through (10 bits and IDLE)
     );
 
-    // always_ff @(posedge clk) begin
-    //     if (rst)
-    //     if (S7_now) begin
-    //         case (bit_n)
-    //             7'b0000000: o_rx_data[0] <= 1
-    //             default: ;
-    //         endcase
-    //     end
-    // end
+    always_ff @(posedge i_clk) begin
+        if (i_rst) begin
+            o_rx_data <= 8'b00000000;
+            o_frame_error <= 1'b0;
+        end
+        else if (S7_now) begin
+            case (bit_state)
+                S_BIT0: o_rx_data[0] <= i_uart_rx_in;
+                S_BIT1: o_rx_data[1] <= i_uart_rx_in;
+                S_BIT2: o_rx_data[2] <= i_uart_rx_in;
+                S_BIT3: o_rx_data[3] <= i_uart_rx_in;
+                S_BIT4: o_rx_data[4] <= i_uart_rx_in;
+                S_BIT5: o_rx_data[5] <= i_uart_rx_in;
+                S_BIT6: o_rx_data[6] <= i_uart_rx_in;
+                S_BIT7: o_rx_data[7] <= i_uart_rx_in;
+                S_STOP: if (i_uart_rx_in != 1) o_frame_error <= 1;
+            endcase
+        end
+    end
 
 endmodule

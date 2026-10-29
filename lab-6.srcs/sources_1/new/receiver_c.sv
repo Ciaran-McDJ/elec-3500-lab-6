@@ -32,13 +32,11 @@ module receiver_c(
     logic counter_en;
     logic S7_now, S15_now;
 
-    logic bit_start;
-    logic [7:0] bit_n;
-    logic bit_stop;
+    logic [10:0] bit_state;
 
     typedef enum logic {
-        S_IDLE: 1'b0,
-        S_DETECTING: 1'b1
+        S_IDLE = 1'b0,
+        S_DETECTING = 1'b1
     } state_t;
 
     state_t state, next_state;
@@ -59,9 +57,7 @@ module receiver_c(
         .i_start(i_uart_rx_in), // Stays at 1 when not using the counter and drops to 0 when counter is supposed to start
         .o_counter_en(counter_en),
         .i_S15_now(S15_now),
-        .o_bit_start(bit_start), //There are 10 bit_X outputs, one is active at a time based on where in the sequence it is
-        .o_bit_n(bit_n),
-        .o_bit_stop(bit_stop)
+        .o_bit_state(bit_state) // This is 1-hot encoded the 11 states that the system goes through (10 bits and IDLE)
     );
 
     // always_ff @(posedge clk) begin

@@ -27,9 +27,7 @@ module bit_counter(
     input logic i_start, // Stays at 1 when not using the counter and drops to 0 when counter is supposed to start
     output logic o_counter_en,
     input logic i_S15_now,
-    output logic o_bit_start, //There are 10 bit_X outputs, one is active at a time based on where in the sequence it is
-    output logic [7:0] o_bit_n,
-    output logic o_bit_stop
+    output logic [10:0] o_bit_state
     );
 
     typedef enum logic [10:0] { //one hot except IDLE state is 10'b0
@@ -47,6 +45,7 @@ module bit_counter(
     } state_t;
 
     state_t state, next_state;
+    assign o_bit_state = state; //Since using 1-hot, no combinational logic necessary, outputs is just the output of each register of the state
 
     always_ff @(posedge i_clk) begin
         if (i_rst) state <= S_IDLE;
@@ -72,20 +71,20 @@ module bit_counter(
         
         // output logic
         // NOTE: Output logic using one hot to make combinational logic involving it simple
-        if (state==S_IDLE) o_counter_en = 0; else o_counter_en = 1;
-        if (state==S_START) o_bit_start = 1; else o_bit_start = 0;
-        case (state)
-            S_BIT0: o_bit_n = 8'b00000001;
-            S_BIT1: o_bit_n = 8'b00000010;
-            S_BIT2: o_bit_n = 8'b00000100;
-            S_BIT3: o_bit_n = 8'b00001000;
-            S_BIT4: o_bit_n = 8'b00010000;
-            S_BIT5: o_bit_n = 8'b00100000;
-            S_BIT6: o_bit_n = 8'b01000000;
-            S_BIT7: o_bit_n = 8'b10000000;
-            default: o_bit_n = 8'b00000000;
-        endcase
-        if (state==S_STOP) o_bit_stop = 1; else o_bit_stop = 0;
+        // if (state==S_IDLE) o_counter_en = 0; else o_counter_en = 1;
+        // if (state==S_START) o_bit_start = 1; else o_bit_start = 0;
+        // case (state)
+        //     S_BIT0: o_bit_n = 8'b00000001;
+        //     S_BIT1: o_bit_n = 8'b00000010;
+        //     S_BIT2: o_bit_n = 8'b00000100;
+        //     S_BIT3: o_bit_n = 8'b00001000;
+        //     S_BIT4: o_bit_n = 8'b00010000;
+        //     S_BIT5: o_bit_n = 8'b00100000;
+        //     S_BIT6: o_bit_n = 8'b01000000;
+        //     S_BIT7: o_bit_n = 8'b10000000;
+        //     default: o_bit_n = 8'b00000000;
+        // endcase
+        // if (state==S_STOP) o_bit_stop = 1; else o_bit_stop = 0;
     end
 
 endmodule

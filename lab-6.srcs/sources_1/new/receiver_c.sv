@@ -29,9 +29,6 @@ module receiver_c(
     output logic o_frame_error
     );
 
-    logic counter_en;
-    logic S7_now, S15_now;
-
     typedef enum logic [10:0] { //one hot except IDLE state is 10'b0
         S_IDLE = 10'b00000000001,
         S_START = 10'b00000000010,
@@ -47,24 +44,15 @@ module receiver_c(
     } state_t;
 
     state_t bit_state;
+    logic S7_now;
 
-    counter_16 receiver_counter_16 (
+    uart_counter receiver_counter (
         .i_clk(i_clk),
         .i_rst(i_rst),
         .i_tick_16x_en(i_tick_16x_en),
-        .i_en(counter_en),
+        .i_start_counting(i_uart_rx_in), //Active low signal. Stays high in IDLE, when drops the counter starts, this signal is then ignored until system returns to IDLE
         .o_S7_now(S7_now),
-        .o_S15_now(S15_now)
-    );
-
-    bit_counter receiver_bit_counter (
-        .i_clk(i_clk),
-        .i_rst(i_rst),
-        .i_tick_16x_en(i_tick_16x_en),
-        .i_start(i_uart_rx_in), // Stays at 1 when not using the counter and drops to 0 when counter is supposed to start
-        .o_counter_en(counter_en),
-        .i_S15_now(S15_now),
-        .o_bit_state(bit_state) // This is 1-hot encoded the 11 states that the system goes through (10 bits and IDLE)
+        .o_bit_state(bit_state)
     );
 
     always_ff @(posedge i_clk) begin

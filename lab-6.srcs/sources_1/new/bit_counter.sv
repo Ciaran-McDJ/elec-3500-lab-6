@@ -24,7 +24,7 @@ module bit_counter(
     input logic i_clk,
     input logic i_rst,
     input logic i_tick_16x_en,
-    input logic i_start, // Stays at 1 when not using the counter and drops to 0 when counter is supposed to start
+    input logic i_start_counting, // Stays at 1 when not using the counter and drops to 0 when counter is supposed to start
     output logic o_counter_en,
     input logic i_S15_now,
     output logic [10:0] o_bit_state
@@ -56,7 +56,7 @@ module bit_counter(
         // next_state logic
         if (i_rst) next_state = S_IDLE;
         else case (state)
-            S_IDLE: if (!i_start) next_state = S_START; else next_state = S_IDLE; //NOTE: This transition doesn't have to happen on a tick, this is so it can detect a super short button press signal. This means that when transmitting, the start bit will be a tiny bit less than one period
+            S_IDLE: if (!i_start_counting) next_state = S_START; else next_state = S_IDLE; //NOTE: This transition doesn't have to happen on a tick, this is so it can detect a super short button press signal. This means that when transmitting, the start bit will be a tiny bit less than one period
             S_START: if (i_S15_now && i_tick_16x_en) next_state = S_BIT0; else next_state = S_START;
             S_BIT0: if (i_S15_now && i_tick_16x_en) next_state = S_BIT1; else next_state = S_BIT0;
             S_BIT1: if (i_S15_now && i_tick_16x_en) next_state = S_BIT2; else next_state = S_BIT1;

@@ -29,18 +29,40 @@ module counter_16(
 
     // TODO - can make state be an enum with 16 states and instead of incrementing it can make our own encoding, the case statement would need to be much longer
 
-    logic [3:0] state;
+    logic [3:0] state, next_state;
 
     always_ff @(posedge i_clk) begin
+        // state progression logic
         if (i_rst) begin
             state <= 4'b0000;
         end else begin
+            // NOTE: state only changes on a tick of the baud generator (other than in reset)
+            if (i_tick_16x_en) state <= next_state;
+        end
+    end
+
+    always_comb begin
+        // Next state logic
+        if (i_rst) begin
+            next_state = 4'b0000;
+        end else begin
             // Just keep incrementing state every tick. Locks at S0 if en is off
             case (state)
-                4'b0000: if (i_tick_16x_en && i_en) state <= state+1;
-                default: if (i_tick_16x_en) state <= state+1;
+                4'b0000: if (i_en) next_state = state+1; else next_state = 4'b0000;
+                default: next_state = state+1;
             endcase
         end
+
+
+        // output signal logic
+        case (state)
+            4'b0111: o_S7_now = 1;
+            default: o_S7_now = 0;
+        endcase
+        case (state)
+            4'b1111: o_S15_now = 1;
+            default: o_S15_now = 0;
+        endcase
     end
 
 endmodule

@@ -32,6 +32,17 @@ module receiver_c(
     logic counter_en;
     logic S7_now, S15_now;
 
+    logic bit_start;
+    logic [7:0] bit_n;
+    logic bit_stop;
+
+    typedef enum logic {
+        S_IDLE: 1'b0,
+        S_DETECTING: 1'b1
+    } state_t;
+
+    state_t state, next_state;
+
     counter_16 receiver_counter_16 (
         .i_clk(i_clk),
         .i_rst(i_rst),
@@ -41,14 +52,25 @@ module receiver_c(
         .o_S15_now(S15_now)
     );
 
-    assign counter_en = !i_rst;
+    bit_counter receiver_bit_counter (
+        .i_clk(i_clk),
+        .i_rst(i_rst),
+        .i_tick_16x_en(i_tick_16x_en),
+        .i_start(i_uart_rx_in), // Stays at 1 when not using the counter and drops to 0 when counter is supposed to start
+        .o_counter_en(counter_en),
+        .i_S15_now(S15_now),
+        .o_bit_start(bit_start), //There are 10 bit_X outputs, one is active at a time based on where in the sequence it is
+        .o_bit_n(bit_n),
+        .o_bit_stop(bit_stop)
+    );
 
-
-    // always_comb begin
-    //     if (i_rst) begin
-    //         counter_en = 0;
-    //     end else begin
-    //         counter_en = 1;
+    // always_ff @(posedge clk) begin
+    //     if (rst)
+    //     if (S7_now) begin
+    //         case (bit_n)
+    //             7'b0000000: o_rx_data[0] <= 1
+    //             default: ;
+    //         endcase
     //     end
     // end
 

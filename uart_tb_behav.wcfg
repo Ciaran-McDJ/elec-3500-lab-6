@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="1,000.000001 us"></ZoomEndTime>
-      <Cursor1Time time="638.375000 us"></Cursor1Time>
+      <ZoomStartTime time="312,839.827 ns"></ZoomStartTime>
+      <ZoomEndTime time="312,912.965 ns"></ZoomEndTime>
+      <Cursor1Time time="312,870.330 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="147"></NameColumnWidth>
-      <ValueColumnWidth column_width="89"></ValueColumnWidth>
+      <NameColumnWidth column_width="145"></NameColumnWidth>
+      <ValueColumnWidth column_width="76"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="20" />
+   <WVObjectSize size="19" />
    <wvobject type="logic" fp_name="/uart_tb/sys_clk">
       <obj_property name="ElementShortName">sys_clk</obj_property>
       <obj_property name="ObjectShortName">sys_clk</obj_property>
@@ -28,21 +28,13 @@
       <obj_property name="ElementShortName">sys_rst</obj_property>
       <obj_property name="ObjectShortName">sys_rst</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/uart_tb/rx_data">
-      <obj_property name="ElementShortName">rx_data[7:0]</obj_property>
-      <obj_property name="ObjectShortName">rx_data[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/uart_tb/sys_rst">
-      <obj_property name="ElementShortName">sys_rst</obj_property>
-      <obj_property name="ObjectShortName">sys_rst</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/uart_tb/dut/i_sys_rst">
-      <obj_property name="ElementShortName">i_sys_rst</obj_property>
-      <obj_property name="ObjectShortName">i_sys_rst</obj_property>
-   </wvobject>
    <wvobject type="logic" fp_name="/uart_tb/dut/rst">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/uart_tb/rx_data">
+      <obj_property name="ElementShortName">rx_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_data[7:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/uart_tb/uart_rx_in">
       <obj_property name="ElementShortName">uart_rx_in</obj_property>
@@ -83,6 +75,10 @@
    <wvobject type="logic" fp_name="/uart_tb/dut/tick_16x_en">
       <obj_property name="ElementShortName">tick_16x_en</obj_property>
       <obj_property name="ObjectShortName">tick_16x_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/uart_tb/dut/ourReceiver/receiver_bit_counter/state">
+      <obj_property name="ElementShortName">state[9:0]</obj_property>
+      <obj_property name="ObjectShortName">state[9:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/uart_tb/dut/ourReceiver/counter_en">
       <obj_property name="ElementShortName">counter_en</obj_property>

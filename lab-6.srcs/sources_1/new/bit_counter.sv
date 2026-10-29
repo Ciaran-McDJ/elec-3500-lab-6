@@ -57,7 +57,8 @@ module bit_counter(
         if (i_rst) next_state = S_IDLE;
         else case (state)
             S_IDLE: if (!i_start) next_state = S_START; else next_state = S_IDLE; //NOTE: This transition doesn't have to happen on a tick, this is so it can detect a super short button press signal. This means that when transmitting, the start bit will be a tiny bit less than one period
-            S_START: if (i_S15_now && i_tick_16x_en) next_state = S_BIT1; else next_state = S_START;
+            S_START: if (i_S15_now && i_tick_16x_en) next_state = S_BIT0; else next_state = S_START;
+            S_BIT0: if (i_S15_now && i_tick_16x_en) next_state = S_BIT1; else next_state = S_BIT0;
             S_BIT1: if (i_S15_now && i_tick_16x_en) next_state = S_BIT2; else next_state = S_BIT1;
             S_BIT2: if (i_S15_now && i_tick_16x_en) next_state = S_BIT3; else next_state = S_BIT2;
             S_BIT3: if (i_S15_now && i_tick_16x_en) next_state = S_BIT4; else next_state = S_BIT3;
@@ -70,8 +71,9 @@ module bit_counter(
         endcase
         
         // output logic
+        if (state==S_IDLE) o_counter_en = 0; else o_counter_en = 1;
+
         // NOTE: Output logic using one hot to make combinational logic involving it simple
-        // if (state==S_IDLE) o_counter_en = 0; else o_counter_en = 1;
         // if (state==S_START) o_bit_start = 1; else o_bit_start = 0;
         // case (state)
         //     S_BIT0: o_bit_n = 8'b00000001;

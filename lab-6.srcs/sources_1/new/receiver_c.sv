@@ -71,7 +71,11 @@ module receiver_c(
         if (i_rst) begin
             o_rx_data <= 8'b00000000;
             o_frame_error <= 1'b0;
-        end
+        end 
+        // else if (bit_state == IDLE && !i_uart_rx_in) begin
+        //     // This resets the stored LEDs at the start of a new trasmission. This is not necessary, makes circuit a bit safer but takes more circuitry
+        //     o_rx_data <= 8'b00000000;
+        // end
         else if (S7_now) begin
             case (bit_state)
                 S_BIT0: o_rx_data[0] <= i_uart_rx_in;

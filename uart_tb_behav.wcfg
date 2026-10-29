@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,000.001 ns"></ZoomEndTime>
-      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="1,000.000001 us"></ZoomEndTime>
+      <Cursor1Time time="638.375000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="147"></NameColumnWidth>
-      <ValueColumnWidth column_width="94"></ValueColumnWidth>
+      <ValueColumnWidth column_width="89"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="19" />
+   <WVObjectSize size="20" />
    <wvobject type="logic" fp_name="/uart_tb/sys_clk">
       <obj_property name="ElementShortName">sys_clk</obj_property>
       <obj_property name="ObjectShortName">sys_clk</obj_property>
@@ -79,6 +79,10 @@
    <wvobject type="array" fp_name="/uart_tb/received_data">
       <obj_property name="ElementShortName">received_data[7:0]</obj_property>
       <obj_property name="ObjectShortName">received_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/uart_tb/dut/tick_16x_en">
+      <obj_property name="ElementShortName">tick_16x_en</obj_property>
+      <obj_property name="ObjectShortName">tick_16x_en</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/uart_tb/dut/ourReceiver/counter_en">
       <obj_property name="ElementShortName">counter_en</obj_property>

@@ -41,7 +41,7 @@ module receiver_c(
         .o_S15_now(S15_now)
     );
 
-    assert counter_en = !i_rst
+    assign counter_en = !i_rst;
 
 
     // always_comb begin

@@ -30,19 +30,22 @@ module uart_top #(
         .clk_out1(clk)
     );
 
-    proc_sys_reset_0 rst_gen
-    (
-      .slowest_sync_clk(clk),
-      .ext_reset_in(i_sys_rst),
-      .aux_reset_in('0),
-      .mb_debug_sys_rst('0),
-      .dcm_locked(locked),    
-      .mb_reset(),
-      .bus_struct_reset(),
-      .peripheral_reset(rst),
-      .interconnect_aresetn(), 
-      .peripheral_aresetn() 
-    );
+    // NOTE: Ciaran disabled the reset ip module since it wasn't working for simulation
+    assign rst = i_sys_rst;
+
+    // proc_sys_reset_0 rst_gen
+    // (
+    //   .slowest_sync_clk(clk),
+    //   .ext_reset_in(i_sys_rst),
+    //   .aux_reset_in('0),
+    //   .mb_debug_sys_rst('0),
+    //   .dcm_locked(locked),    
+    //   .mb_reset(),
+    //   .bus_struct_reset(),
+    //   .peripheral_reset(rst),
+    //   .interconnect_aresetn(), 
+    //   .peripheral_aresetn() 
+    // );
 
     // Transmit button debouncer module
     debouncer #(

@@ -21,7 +21,35 @@
 
 
 module receiver_c(
-    input i_clk,
-    input i_rst
+    input logic i_clk,
+    input logic i_rst,
+    input logic i_tick_16x_en,
+    output logic [7:0] o_rx_data,
+    input logic i_uart_rx_in,
+    output logic o_frame_error
     );
+
+    logic counter_en;
+    logic S7_now, S15_now;
+
+    counter_16 receiver_counter_16 (
+        .i_clk(i_clk),
+        .i_rst(i_rst),
+        .i_tick_16x_en(i_tick_16x_en),
+        .i_en(counter_en),
+        .o_S7_now(S7_now),
+        .o_S15_now(S15_now)
+    );
+
+    assert counter_en = !i_rst
+
+
+    // always_comb begin
+    //     if (i_rst) begin
+    //         counter_en = 0;
+    //     end else begin
+    //         counter_en = 1;
+    //     end
+    // end
+
 endmodule

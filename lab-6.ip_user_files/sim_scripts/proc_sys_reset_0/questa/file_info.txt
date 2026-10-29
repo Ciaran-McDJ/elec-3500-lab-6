@@ -1,0 +1,6 @@
+xpm_cdc.sv,systemverilog,xpm,../../../../../../../../../XilinxSoftware/Vivado/2024.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv,
+xpm_VCOMP.vhd,vhdl,xpm,../../../../../../../../../XilinxSoftware/Vivado/2024.1/data/ip/xpm/xpm_VCOMP.vhd,
+lib_cdc_v1_0_rfs.vhd,vhdl,lib_cdc_v1_0_3,../../../ipstatic/hdl/lib_cdc_v1_0_rfs.vhd,
+proc_sys_reset_v5_0_vh_rfs.vhd,vhdl,proc_sys_reset_v5_0_15,../../../ipstatic/hdl/proc_sys_reset_v5_0_vh_rfs.vhd,
+proc_sys_reset_0.vhd,vhdl,xil_defaultlib,../../../../lab-6.gen/sources_1/ip/proc_sys_reset_0/sim/proc_sys_reset_0.vhd,
+glbl.v,Verilog,xil_defaultlib,glbl.v

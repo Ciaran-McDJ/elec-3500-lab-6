@@ -1,0 +1,5 @@
+vhdl xil_defaultlib  \
+"../../../../lab-6.gen/sources_1/ip/proc_sys_reset_0/sim/proc_sys_reset_0.vhd" \
+
+# Do not sort compile order
+nosort

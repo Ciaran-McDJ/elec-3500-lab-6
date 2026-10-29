@@ -31,13 +31,13 @@ module counter_16(
 
     logic [3:0] state;
 
-    always_ff @(posedge clock) begin
+    always_ff @(posedge i_clk) begin
         if (i_rst) begin
-            state <= 4b'0000;
+            state <= 4'b0000;
         end else begin
             // Just keep incrementing state every tick. Locks at S0 if en is off
             case (state)
-                4b'0000: if (i_tick_16x_en && i_en) state <= state+1;
+                4'b0000: if (i_tick_16x_en && i_en) state <= state+1;
                 default: if (i_tick_16x_en) state <= state+1;
             endcase
         end

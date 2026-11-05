@@ -8,10 +8,7 @@
 // Module Name: edge_detector
 // Project Name: UART Communication Device
 // Target Devices: Nexus A7
-// Tool Versions: 
 // Description: Rising or falling edge detector, modular and easy to add to any project.
-// 
-// Dependencies: 
 // 
 // Revision:
 // Revision 0.01 - File Created

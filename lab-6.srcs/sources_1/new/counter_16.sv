@@ -1,15 +1,14 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
+// Company: ELEC 3500 A1
 // Engineer: Ciaran McDonald-Jensen (SN 101228856)
 // 
 // Create Date: 10/26/2026 05:01:11 PM
-// Design Name: 
+// Design Name: UART_COUNTER
 // Module Name: counter_16
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
+// Project Name: UART Communication Device
+// Target Devices: Nexus A7
+// Description: Counts 16 times over one bit of the uart transmission
 // 
 // Revision: 1.0 - Oct 29 2026 - Basic version made which just increments
 // Revision 0.01 - File Created

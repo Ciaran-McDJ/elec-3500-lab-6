@@ -1,17 +1,14 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
+// Company: ELEC 3500 A1
 // Engineer: Ciaran McDonald-Jensen (SN 101228856)
 // 
 // Create Date: 10/29/2026 01:14:50 PM
-// Design Name: 
+// Design Name: UART_COUNTER
 // Module Name: bit_counter
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
+// Project Name: UART Communication Device
+// Target Devices: Nexus A7
+// Description: State Machine to count through each bit that is sent over uart 
 // 
 // Revision:
 // Revision 0.01 - File Created
@@ -30,7 +27,7 @@ module bit_counter(
     output logic [10:0] o_bit_state
     );
 
-    typedef enum logic [10:0] { //one hot except IDLE state is 10'b0
+    typedef enum logic [10:0] { //one hot encoding
         S_IDLE = 10'b00000000001,
         S_START = 10'b00000000010,
         S_BIT0 = 10'b00000000100,

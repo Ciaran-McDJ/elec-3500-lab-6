@@ -1,17 +1,16 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: ELEC 3500 A1
+// Engineer: Ciaran McDonald-Jensen (SN 101228856)
 // 
 // Create Date: 10/29/2026 01:13:13 PM
-// Design Name: 
+// Design Name: UART_RECEIVER
 // Module Name: receiver_c
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
+// Project Name: UART Communication Device
+// Target Devices: Nexus A7
+// Description: uart receiver module
 // 
-// Dependencies: 
+// Dependencies: uart_counter module
 // 
 // Revision:
 // Revision 0.01 - File Created

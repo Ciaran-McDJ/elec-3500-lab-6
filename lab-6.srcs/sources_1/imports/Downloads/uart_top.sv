@@ -31,21 +31,21 @@ module uart_top #(
     );
 
     // NOTE: Ciaran disabled the reset ip module since it wasn't working for simulation
-    assign rst = i_sys_rst;
+    //assign rst = i_sys_rst;
 
-    // proc_sys_reset_0 rst_gen
-    // (
-    //   .slowest_sync_clk(clk),
-    //   .ext_reset_in(i_sys_rst),
-    //   .aux_reset_in('0),
-    //   .mb_debug_sys_rst('0),
-    //   .dcm_locked(locked),    
-    //   .mb_reset(),
-    //   .bus_struct_reset(),
-    //   .peripheral_reset(rst),
-    //   .interconnect_aresetn(), 
-    //   .peripheral_aresetn() 
-    // );
+     proc_sys_reset_0 rst_gen
+     (
+       .slowest_sync_clk(clk),
+       .ext_reset_in(i_sys_rst),
+       .aux_reset_in('0),
+       .mb_debug_sys_rst('0),
+       .dcm_locked(locked),    
+       .mb_reset(),
+       .bus_struct_reset(),
+       .peripheral_reset(rst),
+       .interconnect_aresetn(), 
+       .peripheral_aresetn() 
+     );
 
     // Transmit button debouncer module
     debouncer #(
@@ -85,9 +85,28 @@ module uart_top #(
         .i_uart_rx_in(i_uart_rx_in),
         .o_frame_error(o_frame_error)
     );
+    
+    transmitter ourTransmitter (
+        .i_clk(clk),
+        .i_rst(rst),
+        .i_tick_16x_en(tick_16x_en),
+        .i_transmit(transmit),
+        .i_tx_data(i_tx_data),
+        .o_uart_tx_out(o_uart_tx_out)
+    );
 
 
     // TODO: Instantiate ILA and add connections
-
+    
+    ila_0 your_instance_name (
+	   .clk(clk), // input wire clk
+	   .probe0(i_tx_data), // input wire [7:0]  probe0  
+	   .probe1(o_rx_data), // input wire [7:0]  probe1 
+       .probe2(i_uart_rx_in), // input wire [0:0]  probe2 
+       .probe3(o_uart_tx_out), // input wire [0:0]  probe3 
+       .probe4(rst), // input wire [0:0]  probe4 
+       .probe5(tick_16x_en), // input wire [0:0]  probe5 
+       .probe6(transmit) // input wire [0:0]  probe6
+    );
 
 endmodule

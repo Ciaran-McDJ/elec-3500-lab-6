@@ -87,8 +87,8 @@ module uart_tb();
         // =====================================
         // UART Transmitter test case
         // =====================================
-        // TODO: Add UART Transmitter test case
-        // Set the data to be transmitted...
+        // Set the data to be transmitted ('A' = ASCII 8'h41)
+        tx_data = "A";
 
         // Wait some time...
         #100;
@@ -97,11 +97,15 @@ module uart_tb();
         // Assert the internal transmit signal to start transmission
         transmit = 1;
         // Set other variables...
+        byte_sent = 0;
 
 
-
-        // Write a task to capture the data from uart_tx_out...
+        // Capture the data from uart_tx_out
         receive_uart_byte();
+        wait (byte_sent);
+
+        transmit = 0;
+        #100;
 
     end
 
@@ -149,9 +153,30 @@ module uart_tb();
     // This task will monitor the uart_tx_out line and reconstruct the byte being transmitted
     task automatic receive_uart_byte();
         received_data = 0;
-        // TODO: Implement this task to capture data from uart_tx_out
-        // You can store it in the received_data variable
-        
+        byte_sent = 0;
+        byte_num = 0;
+
+        // Wait for the start bit (logic 0)
+        wait (uart_tx_out == 1'b0);
+
+        // Wait half a baud period to align with the center of the start bit
+        #(BAUD_PERIOD / 2);
+
+        // Sample the 8 data bits at the center of each bit period (LSB first)
+        for (int i = 0; i < 8; i++) begin
+            #(BAUD_PERIOD);
+            received_data[i] = uart_tx_out;
+            byte_num = byte_num + 1;
+        end
+
+        // Wait for the center of the stop bit, then the remainder of the frame
+        #(BAUD_PERIOD);
+        byte_num = byte_num + 1;
+        #(BAUD_PERIOD / 2);
+
+        // Indicate that the full byte has been received
+        byte_sent = 1;
+
     endtask
 
 

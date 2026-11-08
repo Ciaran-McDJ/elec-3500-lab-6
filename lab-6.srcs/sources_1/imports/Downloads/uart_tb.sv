@@ -74,7 +74,7 @@ module uart_tb();
         // UART Receiver test case
         // =====================================
         // UART Receiver test case: Send the character 'A' (ASCII 41 in hex, 65 in decimal) from the transmitter to the receiver
-        data = "A";
+        data = ")";
 
         // Send a byte from the testbench to the DUT receiver
         send_uart_byte(data);
@@ -88,7 +88,7 @@ module uart_tb();
         // UART Transmitter test case
         // =====================================
         // Set the data to be transmitted ('A' = ASCII 8'h41)
-        tx_data = "A";
+        tx_data = "j";
 
         // Wait some time...
         #100;

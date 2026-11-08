@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="uart_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="uart_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="137.300708 us"></ZoomEndTime>
+      <Cursor1Time time="0.005000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="145"></NameColumnWidth>
+      <ValueColumnWidth column_width="85"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="8" />
+   <wvobject type="logic" fp_name="/uart_tb/dut/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/uart_tb/uart_rx_in">
+      <obj_property name="ElementShortName">uart_rx_in</obj_property>
+      <obj_property name="ObjectShortName">uart_rx_in</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/uart_tb/dut/tick_16x_en">
+      <obj_property name="ElementShortName">tick_16x_en</obj_property>
+      <obj_property name="ObjectShortName">tick_16x_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/uart_tb/dut/ourReceiver/bit_state">
+      <obj_property name="ElementShortName">bit_state[10:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_state[10:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/uart_tb/dut/ourReceiver/receiver_counter/uart_counter_16/state">
+      <obj_property name="ElementShortName">state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">state[3:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/uart_tb/dut/ourReceiver/S7_now">
+      <obj_property name="ElementShortName">S7_now</obj_property>
+      <obj_property name="ObjectShortName">S7_now</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/uart_tb/dut/ourReceiver/receiver_counter/S15_now">
+      <obj_property name="ElementShortName">S15_now</obj_property>
+      <obj_property name="ObjectShortName">S15_now</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/uart_tb/dut/ourReceiver/receiver_counter/counter_en">
+      <obj_property name="ElementShortName">counter_en</obj_property>
+      <obj_property name="ObjectShortName">counter_en</obj_property>
+   </wvobject>
+</wave_config>

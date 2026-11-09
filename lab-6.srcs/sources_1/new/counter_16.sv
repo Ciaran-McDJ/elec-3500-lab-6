@@ -26,7 +26,7 @@ module counter_16(
     output logic o_S15_now
     );
 
-    // TODO - can make state be an enum with 16 states and instead of incrementing it can make our own encoding, the case statement would need to be much longer
+    // NOTE - can make state be an enum with 16 states and instead of incrementing it can make our own encoding, the case statement would need to be much longer
 
     logic [3:0] state, next_state;
 
